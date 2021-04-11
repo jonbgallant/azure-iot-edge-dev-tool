@@ -1,0 +1,61 @@
+{
+    "content": {
+        "modulesContent": {
+            "$edgeAgent": {
+                "properties.desired": {
+                    "modules": {
+                        "LayeredDeploymentTempSensor": {
+                            "settings": {
+                            "image": "mcr.microsoft.com/azureiotedge-simulated-temperature-sensor:${LAYERED_RUNTIME_TAG}",
+                                "createOptions": ""
+                            },
+                            "type": "docker",
+                            "status": "running",
+                            "restartPolicy": "always",
+                            "version": "1.0"
+                        },
+                        "LayeredDeploymentCSharpModule": {
+                            "version": "1.0",
+                            "type": "docker",
+                            "status": "running",
+                            "restartPolicy": "always",
+                            "settings": {
+                                "image": "${MODULES.csharpmodule.amd64}",
+                                "createOptions": {}
+                            }
+                        },
+                        "LayeredDeploymentCSharpModule2": {
+                            "version": "1.0",
+                            "type": "docker",
+                            "status": "running",
+                            "restartPolicy": "always",
+                            "settings": {
+                                "image": "${MODULES.csharpmodule2}",
+                                "createOptions": {}
+                            }
+                        },
+                        "LayeredDeploymentCSharpFunction": {
+                            "version": "1.0",
+                            "type": "docker",
+                            "status": "running",
+                            "restartPolicy": "always",
+                            "settings": {
+                                "image": "${MODULES.csharpfunction.amd64.debug}",
+                                "createOptions": {}
+                            }
+                        }
+                    }
+                }
+            },
+            "$edgeHub": {
+                "properties.desired.routes.upstream": "FROM /messages/* INTO $upstream"
+            },
+            "LayeredDeploymentTempSensor": {
+                "properties.desired": {
+                    "SendData": true,
+                    "SendInterval": 5
+                }
+            }
+        }
+    }
+}
