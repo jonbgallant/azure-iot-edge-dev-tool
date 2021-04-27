@@ -10,7 +10,7 @@ azure-cli-extension
 azure-cli-configure
 azure-cli-resource
 azure-cli-cloud
-iotedgehubdev >= 0.8.0
+iotedgehubdev >= 0.14.3
 applicationinsights
 commentjson
 pypiwin32==219; sys_platform == 'win32' and python_version < '3.6'
